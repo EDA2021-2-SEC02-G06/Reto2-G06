@@ -29,7 +29,7 @@ import config as cf
 from DISClib.ADT import list as lt
 from DISClib.ADT import map as mp
 from DISClib.DataStructures import mapentry as me
-from DISClib.Algorithms.Sorting import shellsort as sa
+from DISClib.Algorithms.Sorting import mergesort as mr
 assert cf
 
 """
@@ -90,6 +90,7 @@ def addMedium(catalog, obra):
             entry = mp.get(medium, esmedium)
             medi = me.getValue(entry)
             
+            
         else:
             medi = NewMedium(esmedium)
             
@@ -138,5 +139,29 @@ def compareMedium(mediumm, med ):
         return 1
     else:
         return -1
+def cmpFunctionDate(obra_uno,obra_dos):
+
+    if obra_uno["Date"] == "" and obra_dos["Date"] == "":
+        obra1 = 0
+        obra2 = 0
+    elif obra_uno["Date"] != "" and obra_dos["Date"] != "":
+        obra1 =int(obra_uno["Date"])
+        obra2 = int(obra_dos["Date"])
+
+    elif obra_uno["Date"] == "":
+        obra1 = 15000
+        obra2 = int(obra_dos["Date"])
+    
+    elif obra_dos["Date"] == "":
+        obra1 = int(obra_uno["Date"])
+        obra2 = 15000
+
+    return obra1 < obra2
 
 
+def MergeSort(lista):
+    cmp = cmpFunctionDate
+    sorted_list = mr.sort(lista,cmp)
+    
+    
+    return sorted_list

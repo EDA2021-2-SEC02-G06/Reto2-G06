@@ -60,6 +60,9 @@ def loadArtistas(catalog):
 
 # Funciones de ordenamiento
 
+def ordenar(lista):
+    return model.MergeSort(lista)
+
 # Funciones de consulta sobre el catálogo
 
 def ObrasSize(catalog):

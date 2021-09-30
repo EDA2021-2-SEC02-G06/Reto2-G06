@@ -20,6 +20,7 @@
  * along withthis program.  If not, see <http://www.gnu.org/licenses/>.
  """
 
+
 import config as cf
 import sys
 import controller
@@ -41,6 +42,13 @@ def printMenu():
 
 catalog = None
 
+def initCatalog():
+    return controller.initCatalog()
+
+def loadData(catalog):
+
+    controller,loadData(catalog)
+
 """
 Menu principal
 """
@@ -48,7 +56,11 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
+        catalog = initCatalog
         print("Cargando información de los archivos ....")
+        controller.loadData(catalog)
+        print("Obras cargadas " + str(controller.ObrasSize(catalog)))
+        print("Artistas cargados " + str(controller.ArtistasSize(catalog)))
 
     elif int(inputs[0]) == 2:
         pass

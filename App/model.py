@@ -67,11 +67,13 @@ def newMedium(medium):
 
 def addObra(catalog, obra):
     lt.addLast(catalog["obras"], obra)
-    #mp.put(catalog["medium"], catalog["obras"]["medium"], obra)
+    
     
 
 def addArtista(catalog, artista):
     lt.addLast(catalog["artistas"], artista)
+    
+def addMedium(catalog, mediumname, obra):
     
 
 # Funciones para creacion de datos

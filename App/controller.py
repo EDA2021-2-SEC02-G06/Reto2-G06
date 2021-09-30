@@ -73,3 +73,4 @@ def ArtistasSize(catalog):
 def getMediumAntiguo(catalog, med):
 
     return model.getMediumAntiguo(catalog, med)
+

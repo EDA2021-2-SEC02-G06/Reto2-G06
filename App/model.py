@@ -51,7 +51,7 @@ def newCatalog():
     catalog["medium"] = mp.newMap(20000,
                                   maptype = "CHAINING",
                                   loadfactor = 7.0,
-                                  comparefunction=None)
+                                  comparefunction=compareMedium)
 
     return catalog
 
@@ -100,11 +100,19 @@ def ArtistasSize(catalog):
 def getMediumAntiguo(catalog, med):
     
     medi = mp.get(catalog["medium"], med)
-    print(medi)
+    
     if medi:
-        print(me.getValue(medi)["obras"])
-    print("Fallo")
+        return me.getValue(medi)
+    return None
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 
 # Funciones de ordenamiento
+def compareMedium(mediumm, med ):
+    medentry = me.getKey(med)
+    if (mediumm == medentry):
+        return 0
+    elif (mediumm > medentry):
+        return 1
+    else:
+        return -1

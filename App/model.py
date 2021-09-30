@@ -67,24 +67,46 @@ def newMedium(medium):
 
 def addObra(catalog, obra):
     lt.addLast(catalog["obras"], obra)
-    mp.put(catalog["medium"], obra["Medium"], obra)
-    
+    #mp.put(catalog["medium"], obra["Medium"], obra)
+    addMedium(catalog, obra)
 
 def addArtista(catalog, artista):
     lt.addLast(catalog["artistas"], artista)
+
     
-"""    
+   
 def addMedium(catalog, obra):
     
-    try: 
+    try:
         medium = catalog["medium"]
-        if (obra["medium"] != ""):
-            esmedium = obra["medium"]
+        if (obra["Medium"] != ""):
+            esmedium = obra["Medium"]
+            
         else:
             esmedium = "Unkown"
-"""
-#def addMedium(catalog, obra):
- #   mp.put(catalog["medium"], obra["Medium"], obra)
+            
+        existemedium = mp.contains(medium, esmedium)
+        if existemedium:
+            entry = mp.get(medium, esmedium)
+            medi = me.getValue(entry)
+            
+        else:
+            medi = NewMedium(esmedium)
+            
+            mp.put(medium, esmedium, medi)
+            
+        lt.addLast(medi["obras"], obra)
+        
+    except Exception:
+        return None
+
+def NewMedium(esmedeium):
+    
+    medi = {"medium": "", "obras": None}
+    medi["medium"] = esmedeium
+    medi["obras"] = lt.newList("ARRAT_LIST")
+    return medi
+
 # Funciones para creacion de datos
 
 # Funciones de consulta
@@ -116,3 +138,5 @@ def compareMedium(mediumm, med ):
         return 1
     else:
         return -1
+
+

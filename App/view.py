@@ -49,6 +49,14 @@ def loadData(catalog):
 
     controller,loadData(catalog)
 
+def PrintMediumAniguo(aver, num):
+   i = 0 
+   
+   for obra in lt.iterator(aver["obras"]):
+        if i < num:
+           print(obra)
+        i += 1
+
 
 
 
@@ -69,7 +77,7 @@ while True:
         med = input("Que medio desea vizualizar: ")
         num = int(input("Cuantas obras más antiguas desea ver: "))
         aver = controller.getMediumAntiguo(catalog, med)
-        print(aver)
+        PrintMediumAniguo(aver, num)
 
 
     else:

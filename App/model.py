@@ -39,11 +39,52 @@ los mismos.
 
 # Construccion de modelos
 
+def newCatalog():
+
+    catalog = {"artistas": None,
+                "obras": None,
+                "medium": None}
+
+    catalog["artistas"] = lt.newList("ARRAY_LIST")
+    catalog["obras"] = lt.newList("ARRAY_LIST")
+
+    catalog["medium"] = mp.newMap(20000,
+                                  maptype = "CHAINING",
+                                  loadfactor = 7.0,
+                                  comparefunction=None)
+
+    return catalog
+
+def newMedium(medium):
+
+    tecnica = {"name": "",
+                "obras": None,
+                "total": 0}
+    
+    tecnica["name"] = medium
+    tecnica["obras"] = lt.newList("ARRAY_LIST")
 # Funciones para agregar informacion al catalogo
+
+def addObra(catalog, obra):
+    lt.addLast(catalog["obras"], obra)
+    mp.put(catalog["medium"], obra["medium"], obra)
+    
+
+def addArtista(catalog, artista):
+    lt.addLast(catalog["artistas"], artista)
+    
 
 # Funciones para creacion de datos
 
 # Funciones de consulta
+
+def ObrasSize(catalog):
+
+    return lt.size(catalog["obras"])
+
+def ArtistasSize(catalog):
+
+    return lt.size(catalog["artistas"])
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 

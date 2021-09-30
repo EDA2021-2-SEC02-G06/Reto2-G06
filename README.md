@@ -2,7 +2,7 @@
 
 Este proyecto contiene los Tipos abstractos de datos, estructuras de datos y algoritmos requeridos por el curso ISIS1225-Estructuras de Datos y Algoritmos
 
-REQ 2: Nicolas Yesid Rivera Lesmes - 202116756
+REQ 4: Nicolas Yesid Rivera Lesmes - 202116756
 REQ 3: Santiago Gustavo Ayala Ciendua - 202110734
 
 -Lib

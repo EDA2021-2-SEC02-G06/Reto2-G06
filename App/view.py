@@ -42,8 +42,8 @@ def printMenu():
 
 catalog = None
 
-def initCatalog():
-    return controller.initCatalog()
+#def initCatalog():
+ #   return controller.initCatalog()
 
 def loadData(catalog):
 
@@ -56,7 +56,7 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
-        catalog = initCatalog
+        catalog = controller.initCatalog()
         print("Cargando información de los archivos ....")
         controller.loadData(catalog)
         print("Obras cargadas " + str(controller.ObrasSize(catalog)))

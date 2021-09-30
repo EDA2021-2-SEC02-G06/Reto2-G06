@@ -45,8 +45,8 @@ def newCatalog():
                 "obras": None,
                 "medium": None}
 
-    catalog["artistas"] = lt.newList("ARRAY_LIST")
-    catalog["obras"] = lt.newList("ARRAY_LIST")
+    catalog["artistas"] = lt.newList("ARRAY_LIST", cmpfunction=None)
+    catalog["obras"] = lt.newList("ARRAY_LIST", cmpfunction=None)
 
     catalog["medium"] = mp.newMap(20000,
                                   maptype = "CHAINING",
@@ -67,7 +67,7 @@ def newMedium(medium):
 
 def addObra(catalog, obra):
     lt.addLast(catalog["obras"], obra)
-    mp.put(catalog["medium"], obra["medium"], obra)
+    #mp.put(catalog["medium"], catalog["obras"]["medium"], obra)
     
 
 def addArtista(catalog, artista):

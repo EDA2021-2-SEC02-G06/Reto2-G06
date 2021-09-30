@@ -38,7 +38,7 @@ operación solicitada
 def printMenu():
     print("Bienvenido")
     print("1- Cargar información en el catálogo")
-    print("2- ")
+    print("2- Las n obras más antiguas para un medio especifico")
 
 catalog = None
 
@@ -63,7 +63,11 @@ while True:
         print("Artistas cargados " + str(controller.ArtistasSize(catalog)))
 
     elif int(inputs[0]) == 2:
-        pass
+        med = input("Que medio desea vizualizar: ")
+        num = int(input("Cuantas obras más antiguas desea ver: "))
+        aver = controller.getMediumAntiguo(catalog, med)
+        print(aver)
+
 
     else:
         sys.exit(0)

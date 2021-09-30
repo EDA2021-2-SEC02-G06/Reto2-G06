@@ -67,15 +67,24 @@ def newMedium(medium):
 
 def addObra(catalog, obra):
     lt.addLast(catalog["obras"], obra)
-    
+    mp.put(catalog["medium"], obra["Medium"], obra)
     
 
 def addArtista(catalog, artista):
     lt.addLast(catalog["artistas"], artista)
     
-def addMedium(catalog, mediumname, obra):
+"""    
+def addMedium(catalog, obra):
     
-
+    try: 
+        medium = catalog["medium"]
+        if (obra["medium"] != ""):
+            esmedium = obra["medium"]
+        else:
+            esmedium = "Unkown"
+"""
+#def addMedium(catalog, obra):
+ #   mp.put(catalog["medium"], obra["Medium"], obra)
 # Funciones para creacion de datos
 
 # Funciones de consulta
@@ -87,6 +96,14 @@ def ObrasSize(catalog):
 def ArtistasSize(catalog):
 
     return lt.size(catalog["artistas"])
+
+def getMediumAntiguo(catalog, med):
+    
+    medi = mp.get(catalog["medium"], med)
+    print(medi)
+    if medi:
+        print(me.getValue(medi)["obras"])
+    print("Fallo")
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 

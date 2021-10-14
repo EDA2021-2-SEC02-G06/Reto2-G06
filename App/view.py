@@ -89,7 +89,7 @@ while True:
         StopTime = time.process_time()
         ElapsedTime = (StopTime - StartTime)*1000
         print("Tiempo de ejecución de:  " + str(ElapsedTime) + " mseg")
-        print(catalog["idartista"])
+        
 
     elif int(inputs[0]) == 3:
         StartTime = time.process_time()

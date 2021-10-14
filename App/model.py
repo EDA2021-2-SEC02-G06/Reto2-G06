@@ -43,18 +43,24 @@ def newCatalog():
 
     catalog = {"artistas": None,
                 "obras": None,
-                "medium": None}
+                "medium": None,
+                "idartistas": None}
 
     catalog["artistas"] = lt.newList("ARRAY_LIST", cmpfunction=None)
     catalog["obras"] = lt.newList("ARRAY_LIST", cmpfunction=None)
 
     catalog["medium"] = mp.newMap(20000,
-                                  maptype = "CHAINING",
-                                  loadfactor = 7.0,
+                                  maptype = "PROBING",
+                                  loadfactor = 0.8,
                                   comparefunction=compareMedium)
+    
+    catalog["idartista"] = mp.newMap(20000,
+                                    maptype = "PROBING", 
+                                    loadfactor = 0.8,
+                                    comparefunction = None)
 
     return catalog
-
+"""
 def newMedium(medium):
 
     tecnica = {"name": "",
@@ -63,6 +69,9 @@ def newMedium(medium):
     
     tecnica["name"] = medium
     tecnica["obras"] = lt.newList("ARRAY_LIST")
+"""
+
+
 # Funciones para agregar informacion al catalogo
 
 def addObra(catalog, obra):
@@ -72,6 +81,7 @@ def addObra(catalog, obra):
 
 def addArtista(catalog, artista):
     lt.addLast(catalog["artistas"], artista)
+    addIDartista(catalog, artista)
 
     
    
@@ -97,6 +107,22 @@ def addMedium(catalog, obra):
             mp.put(medium, esmedium, medi)
             
         lt.addLast(medi["obras"], obra)
+        #print(obra)
+    except Exception:
+        return None
+
+def addIDartista(catalog, artista):
+    
+    try:
+        idartista = catalog["idartista"]
+        if (artista["ConstituentID"] != "" and artista["ConstituentID"] != None):
+            esidartist = artista["ConstituentID"]
+            
+        else:
+            esidartist = "Unkown"
+
+        mp.put(idartista, esidartist, artista)    
+        
         
     except Exception:
         return None
@@ -108,7 +134,77 @@ def NewMedium(esmedeium):
     medi["obras"] = lt.newList("ARRAT_LIST")
     return medi
 
+
+
 # Funciones para creacion de datos
+
+def HashNacionalidad(catalog):
+
+    Nacionalidad = mp.newMap(150,
+                            maptype = "PROBING", 
+                            loadfactor = 0.8,
+                            comparefunction = None)
+
+    codigos = lt.newList("ARRAY_LIST")
+    informacion = catalog["idartista"]
+
+    for obras in lt.iterator(catalog["obras"]):
+        if "," in obras["ConstituentID"]:
+            id_base = obras["ConstituentID"]
+            id_modif = id_base.replace("[", "").replace("]", "")
+            id_mini_list = id_modif.split(",")
+            for element in id_mini_list:
+                lt.addLast(codigos, element)
+        
+        else:
+            id_base = obras["ConstituentID"]
+            id_modif = id_base.replace("[", "").replace("]", "")
+            lt.addLast(codigos, id_modif)
+    
+    
+
+    for elementos in lt.iterator(codigos):
+        entry = mp.get(informacion, elementos)
+        if entry != None:
+            medi = me.getValue(entry)
+            nacionalidad_base = medi["Nationality"]
+            
+
+            if (nacionalidad_base != ""):
+                nacionalidad_fin = nacionalidad_base
+                
+            else:
+                nacionalidad_fin = "Unkown"
+            
+            
+            
+
+            existe_nacionalidad = mp.contains(Nacionalidad, nacionalidad_fin)
+            if existe_nacionalidad:
+                entry2 = mp.get(Nacionalidad, nacionalidad_fin)
+                medi2 = me.getValue(entry2)
+                nueva_medi = medi2 +1
+                #print(nueva_medi)
+                me.setValue(entry2, nueva_medi)
+                
+                
+            else:
+                
+                mp.put(Nacionalidad, nacionalidad_fin, 1)
+                
+
+        #lt.addLast(medi2["obras"])
+    return Nacionalidad
+
+#def NewNacionalidad():
+    
+ #   meter = {"obras": None, "num": 0}
+  #  meter["obras"] = lt.newList("ARRAT_LIST")
+   # return meter
+    
+
+
+
 
 # Funciones de consulta
 

@@ -77,3 +77,6 @@ def getMediumAntiguo(catalog, med):
 
     return model.getMediumAntiguo(catalog, med)
 
+def HashNacionalidad(catalog):
+
+    return model.HashNacionalidad(catalog)

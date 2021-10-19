@@ -40,9 +40,17 @@ operación solicitada
 
 def printMenu():
     print("Bienvenido")
-    print("1- Cargar información en el catálogo")
-    print("2- Las n obras más antiguas para un medio especifico")
+    print("1 - Cargar información en el catálogo")
+    print("2 - Las n obras más antiguas para un medio especifico")
     print("3 - Número total de obras de obras de x Nacionalidad")
+    print("4 - REQUERIMIENTO 1")
+    print("5 - REQUERIMIENTO 2")
+    print("6 - REQUERIMIENTO 3")
+    print("7 - REQUERIMIENTO 4")
+    print("8 - REQUERIMIENTO 5")
+    print("9 - REQUERIMIENTO 6")
+    print("10 - FIN DEL PROGRAMA")
+
 
 catalog = None
 
@@ -102,6 +110,26 @@ while True:
         ElapsedTime = (StopTime - StartTime)*1000
         print("Tiempo de ejecución de:  " + str(ElapsedTime) + " mseg")
 
+    elif int(inputs[0]) == 4:
+        """ REQUERIMIENTO 1"""
+    
+    elif int(inputs[0]) == 5:
+        """REQUERIMIENTO 2"""
+
+    elif int(inputs[0]) == 6:
+        """REQUERIMIENTO 3"""
+    
+    elif int(inputs[0]) == 7:
+        """REQUERIMIENTO 4"""
+
+    elif int(inputs[0]) == 8:
+        """REQUERIMIENTO 5"""
+
+    elif int(inputs[0]) == 9:
+        """REQUERIMIENTO 6"""
+
+    elif int(inputs[0]) == 10:
+        """FIN"""
 
     else:
         sys.exit(0)

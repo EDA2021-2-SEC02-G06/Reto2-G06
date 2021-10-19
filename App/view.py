@@ -46,7 +46,7 @@ def printMenu():
     print("4 - REQUERIMIENTO 1")
     print("5 - REQUERIMIENTO 2")
     print("6 - REQUERIMIENTO 3")
-    print("7 - REQUERIMIENTO 4")
+    print("7 - REQUERIMIENTO 4 - Obras de un artista clasificado por tecnicas")
     print("8 - REQUERIMIENTO 5")
     print("9 - REQUERIMIENTO 6")
     print("10 - FIN DEL PROGRAMA")
@@ -118,6 +118,7 @@ while True:
 
     elif int(inputs[0]) == 6:
         """REQUERIMIENTO 3"""
+        nombre = input("")
     
     elif int(inputs[0]) == 7:
         """REQUERIMIENTO 4"""

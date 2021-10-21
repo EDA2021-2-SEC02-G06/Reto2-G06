@@ -265,10 +265,8 @@ def req2(catalogo,inicio,fin):
                 lt.addFirst(lista,obra)
                 mp.put(fechas,año,lista)
                 contador +=1
-
-
-
     return fechas,contador
+
 
 def req1primeros(mapa,lista):
     primeros = lt.newList("ARRAY_LIST")

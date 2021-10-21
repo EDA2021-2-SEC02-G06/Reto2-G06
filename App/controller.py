@@ -70,7 +70,9 @@ def initObrasCrono(catalog,inicio,fin):
     """
     retorno = model.req2(catalog,inicio,fin)
     return retorno
+def obtenerArtist(primeros,ultimos,catalogo):
 
+    return model.obtenerArtist(primeros,ultimos,catalogo)
 
 # Funciones de ordenamiento
 

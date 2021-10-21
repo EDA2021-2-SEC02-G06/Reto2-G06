@@ -301,6 +301,22 @@ def Encontrar_Artista_ID(nombre, catalog):
 
     model.Encontrar_Artista_ID(nombre, catalog)
 
-def Map_Tecnicas_Artista(Id_Artista, catalog):
+def Map_Tecnicas_Artista(catalog, nombre):
 
-    model.Map_Tecnicas_Artista(Id_Artista, catalog)
+    return model.Map_Tecnicas_Artista(catalog, nombre)
+
+def idaf(nombre, catalog):
+
+    model.idaf(nombre, catalog)
+
+def Map_Departamentos(catalog, dpto):
+
+    return model.Map_Departamentos(catalog, dpto)
+
+def Depto_Especifico(dpto, Map_Depto):
+
+    model.Depto_Especifico(dpto, Map_Depto)
+
+def funcion_madre(catalog, numero, fecha_ini, fecha_fini):
+
+    return model.funcion_madre(catalog, numero, fecha_ini, fecha_fini)

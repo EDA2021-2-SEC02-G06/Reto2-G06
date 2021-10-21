@@ -249,11 +249,9 @@ def req2(catalogo,inicio,fin):
     for obra in lt.iterator(catalogo["obras"]):
         año_obra = obra["DateAcquired"]
         if año_obra == "" or año_obra == None or año_obra == "Unknow":
-            obra["DateAcquired"] == dt.now()
-            print(obra["DateAcquired"])
-
-            
-        año = dt.strptime(obra["DateAcquired"],"%Y-%m-%d")
+            año_obra = "2021-10-10"
+           
+        año = dt.strptime(año_obra,"%Y-%m-%d")
         if (año>=inicio) and (año <= fin) :
             if mp.contains(fechas,año):
                 entry = mp.get(fechas,año)

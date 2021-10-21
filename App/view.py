@@ -116,6 +116,7 @@ while True:
 
     elif int(inputs[0]) == 4:
         """ REQUERIMIENTO 1"""
+        StartTime = time.process_time()
 
         fecha_inicio = int((input("Ingrese el año inicial: ")))
         fecha_fin = int(input("Ingrese el año final: "))
@@ -145,6 +146,9 @@ while True:
                 print(artist["DisplayName"]+"   "+artist["BeginDate"]+"   "+artist["EndDate"]+"   "+artist["Nationality"]+"   "+artist["Gender"])
                 counter +=1
         
+        StopTime = time.process_time()
+        ElapsedTime = (StopTime - StartTime)*1000
+        print("Tiempo de ejecución de:  " + str(ElapsedTime) + " mseg")
         
     
     elif int(inputs[0]) == 5:
@@ -157,13 +161,14 @@ while True:
         lista_artistas = controller.ordenar(mp.keySet(mapa))
         primeros = controller.req1primeros (mapa,lista_artistas)
         ultimos = controller.req1ultimos(mapa,lista_artistas)
-
+        print(primeros)
         print("------- PRIMEROS Y ULTIMAS TRES OBRAS ENTRE "+str(fecha_inicio)+" Y "+str(fecha_fin)+" -------")
 
         print("| NOMBRE |"+"    "+"| AÑO DE NACIMIENTO |" +"    " + "| AÑO DE FALLECIMIENTO |"+"    "+"| NACIONALIDAD |"+"    "+"| GÉNERO |"+"    ")
 
         strike = 0
         for artist in lt.iterator(primeros):
+            print(artist)
             if strike < 3:
                 print(artist["DisplayName"]+"   "+artist["BeginDate"]+"   "+artist["EndDate"]+"   "+artist["Nationality"]+"   "+artist["Gender"])
                 strike +=1
@@ -500,7 +505,6 @@ while True:
         """REQUERIMIENTO 4"""
         
         
- 
 
     elif int(inputs[0]) == 8:
         """REQUERIMIENTO 5"""

@@ -158,22 +158,28 @@ while True:
         primeros = controller.req1primeros (mapa,lista_artistas)
         ultimos = controller.req1ultimos(mapa,lista_artistas)
 
+        prime_auto,ulti_auto = controller.obtenerArtist(primeros,ultimos,catalog)
+
+        
+
+        
+
         print("------- PRIMEROS Y ULTIMAS TRES OBRAS ENTRE "+str(fecha_inicio)+" Y "+str(fecha_fin)+" -------")
 
-        print("| NOMBRE |"+"    "+"| AÑO DE NACIMIENTO |" +"    " + "| AÑO DE FALLECIMIENTO |"+"    "+"| NACIONALIDAD |"+"    "+"| GÉNERO |"+"    ")
+        print("| TITULO |"+"    "+"| ARTISTA(S) |" +"    " + "| FECHA |"+"    "+"| MEDIO |"+"    "+"| DIMENSIONES |"+"    ")
 
         strike = 0
-        for artist in lt.iterator(primeros):
+        for artist in lt.iterator(prime_auto):
             if strike < 3:
-                print(artist["DisplayName"]+"   "+artist["BeginDate"]+"   "+artist["EndDate"]+"   "+artist["Nationality"]+"   "+artist["Gender"])
+                print(artist["Title"]+"   "+artist["ConstituentID"]+"   "+artist["Date"]+"   "+artist["Medium"]+"   "+artist["Dimensions"])
                 strike +=1
 
         print("_____________________")
 
         counter = 0
-        for artist in lt.iterator(ultimos):
+        for artist in lt.iterator(ulti_auto):
             if counter < 3:
-                print(artist["DisplayName"]+"   "+artist["BeginDate"]+"   "+artist["EndDate"]+"   "+artist["Nationality"]+"   "+artist["Gender"])
+                print(artist["Title"]+"   "+artist["ConstituentID"]+"   "+artist["Date"]+"   "+artist["Medium"]+"   "+artist["Dimensions"])
                 counter +=1
 
     
@@ -195,7 +201,7 @@ while True:
     elif int(inputs[0]) == 7:
         """REQUERIMIENTO 4"""
 
-        
+
         
         
  

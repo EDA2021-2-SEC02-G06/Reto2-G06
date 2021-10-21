@@ -206,6 +206,56 @@ def HashNacionalidad(catalog):
 
         #lt.addLast(medi2["obras"])
     return Nacionalidad
+def obtenerArtist(primeros,ultimos,catalogo):
+    codigos_uno = lt.newList("ARRAY_LIST")
+    codigos_dos = lt.newList("ARRAY_LIST")
+    new_primero = lt.newList("ARRAY_LIST")
+    new_ultimos = lt.newList("ARRAY_LIST")
+    for obras in lt.iterator(primeros):
+        if "," in obras["ConstituentID"]:
+            id_base = obras["ConstituentID"]
+            id_modif = id_base.replace("[", "").replace("]", "")
+            id_mini_list = id_modif.split(",")
+            for element in id_mini_list:
+                lt.addLast(codigos_uno, element)
+        
+        else:
+            id_base = obras["ConstituentID"]
+            id_modif = id_base.replace("[", "").replace("]", "")
+            lt.addLast(codigos_uno, id_modif)
+        
+        autores = lt.newList("ARRAY_LIST")
+        for codigo in lt.iterator(codigos_uno):
+            pareja = mp.get(catalogo["idartista"],codigo)
+            valor = me.getValue(pareja)
+            lt.addLast(autores,valor["DisplayName"])
+        obras["ConstituentID"] == autores
+        lt.addLast(new_primero,obras)
+
+    
+    for obras in lt.iterator(ultimos):
+        if "," in obras["ConstituentID"]:
+            id_base = obras["ConstituentID"]
+            id_modif = id_base.replace("[", "").replace("]", "")
+            id_mini_list = id_modif.split(",")
+            for element in id_mini_list:
+                lt.addLast(codigos_dos, element)
+        
+        else:
+            id_base = obras["ConstituentID"]
+            id_modif = id_base.replace("[", "").replace("]", "")
+            lt.addLast(codigos_dos, id_modif)
+        
+        autores = lt.newList("ARRAY_LIST")
+        for codigo in lt.iterator(codigos_uno):
+            pareja = mp.get(catalogo["idartista"],codigo)
+            valor = me.getValue(pareja)
+            lt.addLast(autores,valor["DisplayName"])
+        obras["ConstituentID"] == autores
+        lt.addLast(new_ultimos,obras)
+
+    return new_primero,new_ultimos
+
 
 def fechasmap(catalog,inicio,fin):
 

@@ -85,6 +85,9 @@ while True:
         controller.loadData(catalog)
         print("Obras cargadas " + str(controller.ObrasSize(catalog)))
         print("Artistas cargados " + str(controller.ArtistasSize(catalog)))
+        
+   
+        
 
     elif int(inputs[0]) == 2:
         StartTime = time.process_time()
@@ -483,22 +486,43 @@ while True:
 
     elif int(inputs[0]) == 6:
         """REQUERIMIENTO 3"""
-        nombre = input("¿Cuál es el nombre del artista")
+        nombre = input("¿Cuál es el nombre del artista? ")
         StartTime = time.process_time()
-        Id_Artista = controller.Encontrar_Artista_ID(nombre, catalog)
-        print(Id_Artista)
-        Map_Tecnicas = controller.Map_Tecnicas_Artista(Id_Artista, catalog)
+        Map_Tecnicas = controller.Map_Tecnicas_Artista(catalog, nombre)
+        StopTime = time.process_time()
+        ElapsedTime = (StopTime - StartTime)*1000
+        print("Tiempo de ejecución de:  " + str(ElapsedTime) + " mseg")
+        
         
 
 
     elif int(inputs[0]) == 7:
         """REQUERIMIENTO 4"""
+        
+        
+ 
 
     elif int(inputs[0]) == 8:
         """REQUERIMIENTO 5"""
+        StartTime = time.process_time()
+        dpto = input("¿Qué departamento desea analizar? ")
+        Map_Depto = controller.Map_Departamentos(catalog, dpto)
+        StopTime = time.process_time()
+        ElapsedTime = (StopTime - StartTime)*1000
+        print("Tiempo de ejecución de:  " + str(ElapsedTime) + " mseg")
 
     elif int(inputs[0]) == 9:
         """REQUERIMIENTO 6"""
+        StartTime = time.process_time()
+        numero = int(input("¿Cuantos artistas desea ver? "))
+        fecha_ini = input("¿Cuál es el año inicial? ")
+        fecha_fini = input("Cuál es el año final? ")
+        print("")
+        print("")
+        funcion_madre = controller.funcion_madre(catalog, numero, fecha_ini, fecha_fini)
+        StopTime = time.process_time()
+        ElapsedTime = (StopTime - StartTime)*1000
+        print("Tiempo de ejecución de:  " + str(ElapsedTime) + " mseg")
 
     elif int(inputs[0]) == 10:
         """FIN"""

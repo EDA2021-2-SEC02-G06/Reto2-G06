@@ -247,26 +247,26 @@ def req2(catalogo,inicio,fin):
     contador = 0
 
     for obra in lt.iterator(catalogo["obras"]):
-        año_obra = obra["DateAcquired"]
-        if año_obra == "" or año_obra == None or año_obra == "Unknow":
-            obra["DateAcquired"] == dt.now()
-            print(obra["DateAcquired"])
+        eva = obra["DateAcquired"]
+        if eva == "" or eva == None or eva == "Unknow":
+            
+            
 
             
-        año = dt.strptime(obra["DateAcquired"],"%Y-%m-%d")
-        if (año>=inicio) and (año <= fin) :
-            if mp.contains(fechas,año):
-                entry = mp.get(fechas,año)
-                value = me.getValue(entry)
-                lt.addFirst(value,obra)
-                mp.put(fechas,año,value)
-                contador +=1
+            año = dt.strptime(obra["DateAcquired"],"%Y-%m-%d")
+            if (año>=inicio) and (año <= fin) :
+                if mp.contains(fechas,año):
+                    entry = mp.get(fechas,año)
+                    value = me.getValue(entry)
+                    lt.addFirst(value,obra)
+                    mp.put(fechas,año,value)
+                    contador +=1
             
-            else:
-                lista = lt.newList("ARRAY_LIST")
-                lt.addFirst(lista,obra)
-                mp.put(fechas,año,lista)
-                contador +=1
+                else:
+                    lista = lt.newList("ARRAY_LIST")
+                    lt.addFirst(lista,obra)
+                    mp.put(fechas,año,lista)
+                    contador +=1
 
 
 

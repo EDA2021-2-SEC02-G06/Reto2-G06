@@ -45,17 +45,31 @@ def loadData(catalog):
 
 def loadObras(catalog):
 
-    obrasfile = cf.data_dir + "MoMa/Artworks-utf8-large.csv"
+    obrasfile = cf.data_dir + "MoMa/Artworks-utf8-small.csv"
     input_file = csv.DictReader(open(obrasfile, encoding = "utf-8"))
     for obra in input_file:
         model.addObra(catalog, obra)
 
 def loadArtistas(catalog):
 
-    artistasfile = cf.data_dir + "MoMa/Artists-utf8-large.csv"
+    artistasfile = cf.data_dir + "MoMa/Artists-utf8-small.csv"
     input_file = csv.DictReader(open(artistasfile, encoding = "utf-8"))
     for artista in input_file:
         model.addArtista(catalog, artista)
+
+def initArtistCrono(catalog,inicio,fin):
+    """
+    Llama la función que crea una lista vacía para el requerimiento 1.
+    """
+    retorno = model.fechasmap(catalog,inicio,fin)
+    return retorno
+
+def initObrasCrono(catalog,inicio,fin):
+    """
+    Llama la función que crea una lista vacía para el requerimiento 1.
+    """
+    retorno = model.req2(catalog,inicio,fin)
+    return retorno
 
 
 # Funciones de ordenamiento
@@ -80,7 +94,12 @@ def getMediumAntiguo(catalog, med):
 def HashNacionalidad(catalog):
 
     return model.HashNacionalidad(catalog)
+def req1primeros(mapa,lista):
 
+    return model.req1primeros(mapa,lista)
+
+def req1ultimos(mapa,lista):
+    return model.req1ultimos(mapa,lista)
 
 
 

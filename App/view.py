@@ -21,6 +21,7 @@
  """
 
 
+from typing import Counter
 import config as cf
 import sys
 import controller
@@ -112,9 +113,69 @@ while True:
 
     elif int(inputs[0]) == 4:
         """ REQUERIMIENTO 1"""
+
+        fecha_inicio = int((input("Ingrese el año inicial: ")))
+        fecha_fin = int(input("Ingrese el año final: "))
+
+        mapa,contador= controller.initArtistCrono(catalog,fecha_inicio,fecha_fin)
+        lista_artistas = controller.ordenar(mp.keySet(mapa))
+        primeros = controller.req1primeros (mapa,lista_artistas)
+        ultimos = controller.req1ultimos(mapa,lista_artistas)
+
+        print("------- PRIMEROS Y ULTIMOS TRES ARTISTA NACIDOS ENTRE "+str(fecha_inicio)+" Y "+str(fecha_fin)+" -------")
+
+        print("| NOMBRE |"+"    "+"| AÑO DE NACIMIENTO |" +"    " + "| AÑO DE FALLECIMIENTO |"+"    "+"| NACIONALIDAD |"+"    "+"| GÉNERO |"+"    ")
+
+
+        strike = 0
+        for artist in lt.iterator(primeros):
+            if strike < 3:
+                print(artist["DisplayName"]+"   "+artist["BeginDate"]+"   "+artist["EndDate"]+"   "+artist["Nationality"]+"   "+artist["Gender"])
+                strike +=1
+
+        print("_____________________")
+
+        
+        counter = 0
+        for artist in lt.iterator(ultimos):
+            if counter < 3:
+                print(artist["DisplayName"]+"   "+artist["BeginDate"]+"   "+artist["EndDate"]+"   "+artist["Nationality"]+"   "+artist["Gender"])
+                counter +=1
+        
+        
     
     elif int(inputs[0]) == 5:
         """REQUERIMIENTO 2"""
+
+        fecha_inicio = (input("Ingrese la fecha inicial (AAAA-MM-DD):"))
+        fecha_fin = (input("Ingrese la fecha final (AAAA-MM-DD):"))
+
+        mapa,contador= controller.initObrasCrono(catalog,fecha_inicio,fecha_fin)
+        lista_artistas = controller.ordenar(mp.keySet(mapa))
+        primeros = controller.req1primeros (mapa,lista_artistas)
+        ultimos = controller.req1ultimos(mapa,lista_artistas)
+
+        print("------- PRIMEROS Y ULTIMAS TRES OBRAS ENTRE "+str(fecha_inicio)+" Y "+str(fecha_fin)+" -------")
+
+        print("| NOMBRE |"+"    "+"| AÑO DE NACIMIENTO |" +"    " + "| AÑO DE FALLECIMIENTO |"+"    "+"| NACIONALIDAD |"+"    "+"| GÉNERO |"+"    ")
+
+        strike = 0
+        for artist in lt.iterator(primeros):
+            if strike < 3:
+                print(artist["DisplayName"]+"   "+artist["BeginDate"]+"   "+artist["EndDate"]+"   "+artist["Nationality"]+"   "+artist["Gender"])
+                strike +=1
+
+        print("_____________________")
+
+        counter = 0
+        for artist in lt.iterator(ultimos):
+            if counter < 3:
+                print(artist["DisplayName"]+"   "+artist["BeginDate"]+"   "+artist["EndDate"]+"   "+artist["Nationality"]+"   "+artist["Gender"])
+                counter +=1
+
+    
+
+
 
 
 

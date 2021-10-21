@@ -30,6 +30,7 @@ from DISClib.ADT import list as lt
 from DISClib.ADT import map as mp
 from DISClib.DataStructures import mapentry as me
 from DISClib.Algorithms.Sorting import mergesort as mr
+from datetime import datetime as dt
 assert cf
 
 """
@@ -196,16 +197,106 @@ def HashNacionalidad(catalog):
         #lt.addLast(medi2["obras"])
     return Nacionalidad
 
-#def NewNacionalidad():
+def fechasmap(catalog,inicio,fin):
+
+    fechas = mp.newMap(1000,
+                            maptype = "CHAINING", 
+                            loadfactor = 4,
+                            comparefunction = None)
     
- #   meter = {"obras": None, "num": 0}
-  #  meter["obras"] = lt.newList("ARRAT_LIST")
-   # return meter
+
+    contador = 0
+
+    for artist in lt.iterator(catalog["artistas"]):
+        año = int(artist["BeginDate"])
+        if (año>=inicio) and (año <= fin) and (año != None) :
+            if mp.contains(fechas,año):
+                entry = mp.get(fechas,año)
+                value = me.getValue(entry)
+                lt.addFirst(value,artist)
+                mp.put(fechas,año,value)
+                contador +=1
+            
+            else:
+                lista = lt.newList("ARRAY_LIST")
+                lt.addFirst(lista,artist)
+                mp.put(fechas,año,lista)
+                contador +=1
+
+    return fechas,contador
+
+def req2(catalogo,inicio,fin):
+    fechas = mp.newMap(1000,
+                            maptype = "CHAINING", 
+                            loadfactor = 4,
+                            comparefunction = None)
+
+    inicio = dt.strptime(inicio,"%Y-%m-%d")
+    fin = dt.strptime(fin,"%Y-%m-%d")
+    
+    contador = 0
+
+    for obra in lt.iterator(catalogo["obras"]):
+        año_obra = obra["DateAcquired"]
+        if año_obra == "" or año_obra == None or año_obra == "Unknow":
+            obra["DateAcquired"] == dt.now()
+            print(obra["DateAcquired"])
+
+            
+        año = dt.strptime(obra["DateAcquired"],"%Y-%m-%d")
+        if (año>=inicio) and (año <= fin) :
+            if mp.contains(fechas,año):
+                entry = mp.get(fechas,año)
+                value = me.getValue(entry)
+                lt.addFirst(value,obra)
+                mp.put(fechas,año,value)
+                contador +=1
+            
+            else:
+                lista = lt.newList("ARRAY_LIST")
+                lt.addFirst(lista,obra)
+                mp.put(fechas,año,lista)
+                contador +=1
+
+
+
+    return fechas,contador
+
+def req1primeros(mapa,lista):
+    primeros = lt.newList("ARRAY_LIST")
     
 
+    for fecha in lt.iterator(lista):
+        if lt.size(primeros) < 3:
+            entry = mp.get(mapa,fecha)
+            value = me.getValue(entry)
+            
+            for artist in lt.iterator(value):
+                lt.addLast(primeros,artist)
+            
+    return primeros
 
+def req1ultimos(mapa,lista):
+    ultimos = lt.newList("ARRAY_LIST")
+    sublista = lt.newList("ARRAY_LIST")
+    
 
+    for i in range(0,3):
+        valor = lt.lastElement(lista)
+        lt.removeLast(lista)
+        lt.addLast(sublista,valor)
 
+   
+
+    for fecha in lt.iterator(sublista):
+        if lt.size(ultimos) < 3 :
+            entry = mp.get(mapa,fecha)
+            value = me.getValue(entry)
+            
+            for artist in lt.iterator(value):
+                lt.addLast(ultimos,artist)
+        
+    return ultimos
 # Funciones de consulta
 
 def ObrasSize(catalog):
@@ -224,7 +315,17 @@ def getMediumAntiguo(catalog, med):
         return me.getValue(medi)
     return None
 
+
 # Funciones utilizadas para comparar elementos dentro de una lista
+
+def cmpArtistByBeginDate(artist1, artist2):
+    """
+    Devuelve verdadero (True) si el 'Date' de artwork1 es menores que el de artwork2
+    Args:
+    artwork1: informacion de la primera obra que incluye su valor 'DateAcquired'
+    artwork2: informacion de la segunda obra que incluye su valor 'DateAcquired'
+    """
+    return artist1 < artist2
 
 # Funciones de ordenamiento
 def compareMedium(mediumm, med ):
@@ -256,7 +357,7 @@ def cmpFunctionDate(obra_uno,obra_dos):
 
 
 def MergeSort(lista):
-    cmp = cmpFunctionDate
+    cmp = cmpArtistByBeginDate
     sorted_list = mr.sort(lista,cmp)
     
     
